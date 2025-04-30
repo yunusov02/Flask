@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <a href="{{ url_for('posts.create_post') }}" class="btn btn-primary btn-block">+ Add Blog</a>
+
+    <form method="get" class="row g-3 align-items-center mb-4">
+        <div class="col-auto">
+          <label for="filter" class="col-form-label">Filter by category:</label>
+        </div>
+        <div class="col-auto">
+          <select name="category" id="category" class="form-select">
+            <option value="0">All</option>
+            {% for category in categories %}
+                <option value="{{ category['category_id'] }}">{{ category['name'] }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+    
+</div>
+  
+<div class="row mt-4">
+    {% for post in posts %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if post.image %}
+                    <img src="{{ url_for('static', filename=post.image) }}" class="card-img-top" alt="{{ post.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body[:100] }}...</p>
+                    <a href="{{ url_for('posts.detail_post', id=post['post_id']) }}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>No posts available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="text-center mt-5">
+        <h1>DevLog</h1>
+        <p class="lead">where every developer can post their ideas</p>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Posts</a>
+    </div>
+</div>
+
+{% endblock %}

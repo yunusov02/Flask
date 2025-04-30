@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<form method="post">
+  <select class="form-select" aria-label="Default select example" name="category">
+    <option selected value="0">Open this select menu</option>
+    {% for category in categories %}
+      <option value="{{ category['category_id'] }}">{{ category['name'] }}</option>
+    {% endfor %}
+  </select>
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title">
+    <div id="emailHelp" class="form-text">Enter Blog title</div>
+  </div>
+  <div class="mb-3">
+    <label for="body" class="form-label">Body</label>
+    <textarea type="textarea" class="form-control" id="body" name="body"></textarea>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="publish" name="publish" checked>
+    <label class="form-check-label" for="exampleCheck1">Publish</label>
+  </div>
+  <button type="submit" class="btn btn-primary">+ Add Blog</button>
+</form>
+
+{% endblock %}
