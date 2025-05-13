@@ -1,7 +1,8 @@
 from sqlalchemy import (
     Column,
     Integer,
-    String
+    String,
+    ForeignKey
 )
 
 

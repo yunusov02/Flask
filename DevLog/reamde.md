@@ -81,3 +81,102 @@ Implementation
 
 First use what you learned yesterday
 and use above Implementation
+
+
+Models
+    Users
+    Followers
+    Categories
+    Posts
+    Media_Files
+    Comments
+    Likes
+    Schedule_post
+    Post_views
+    
+
+
+Flask API
+    - Blogify API
+    - e Commerce API
+    - RealTimeCHat API
+PostgreSQL
+    - 1-4
+    - 5-8
+    - 9-12
+    - 12-16
+    - 16-20
+HTML/CSS/Bootstrap
+    - Main Course
+    - YouTube
+    - Facebook
+    - Linkedn
+    - Asaxiy
+    - Twitter
+    
+DevOps
+    - Nginx
+    - Docker
+    - CI/CD Gitlab
+    - CI/CD Github
+Flask
+    - Blogify
+    - e Commerce
+    - RealTimeChat
+    - s21_decimal
+
+
+
+Django
+    - Blog Application
+    - RealEstate
+    - e Commerce
+    - POS
+    - Social App
+    - Online Job Portal
+    - HR MS
+    - Acc & Fin MS
+    - School Management System
+Django API
+    - Blog Application API
+    - RealEstate API
+    - e Commerce API
+    - POS API
+    - Social App API
+    - Online Job Portal API
+    - HR MS API
+    - Acc & Fin MS API
+    - School Management System API
+JS/React
+    - Main Course
+    - JS30
+    - React
+    -23FullStackBootcamp
+
+
+
+
+FastAPI
+    - Manufacturing ERP
+    - Yandex Go
+    - Yandex Eats
+    - Uzum
+MongoDB
+    - Getting Start
+    - CRUD
+    - Aggregation
+    - Indexes
+    - Tools
+    - Python
+    
+
+
+
+
+
+
+
+
+
+
+
