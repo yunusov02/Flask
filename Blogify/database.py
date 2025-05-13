@@ -1,11 +1,25 @@
-from datetime import datetime
+from typing import List, Optional
+from datetime import datetime, timezone
 from sqlalchemy import create_engine
-from sqlalchemy import Column, DateTime, Integer
 
-from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
+from sqlalchemy import (
+    Column, 
+    DateTime, 
+    Integer, 
+    func
+)
+
+from sqlalchemy.orm import (
+    scoped_session, 
+    sessionmaker, 
+    declarative_base,
+    Mapped,
+    mapped_column,
+    relationship
+)
 
 
-engine = create_engine('sqlite:////blogify.db')
+engine = create_engine('sqlite:///blogify.db')
 
 db_session = scoped_session(sessionmaker(
     autocommit=False,
@@ -14,16 +28,18 @@ db_session = scoped_session(sessionmaker(
 ))
 
 Base = declarative_base()
+Base.query = db_session.query_property()
 
 class BaseModel(Base):
     __abstract__ = True
 
-    id = Column(Integer, primary_key=True)
-    created_at = Column(DateTime, default=datetime.now())
-    deleted_at = Column(DateTime, nullable=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), onupdate=func.now(), server_default=func.now())
+    deleted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
 
     def soft_delete(self):
-        self.deleted_at = datetime.now()
+        self.deleted_at = datetime.now(timezone.utc)
 
     def restore(self):
         self.deleted_at = None
@@ -38,14 +54,13 @@ class BaseModel(Base):
 
 
 def init_db():
-    # from apps.admin.models *
-    # from apps.likes.models *
-    # from apps.posts.models *
-    # from apps.users.models *
+    from apps.users.models import User, Followers
+    from apps.posts.models import Post, SchedulePost, MediaFiles
+    from apps.likes.models import Comments, Likes, PostViews
 
-    Base.metadata.create_all(blind=engine)
-
+    BaseModel.metadata.create_all(bind=engine)
 
 
 
 
+init_db()
