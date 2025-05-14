@@ -7,7 +7,7 @@ from sqlalchemy.orm import (
     relationship
 )
 
-from database import BaseModel
+from database.basemodel import BaseModel
 from ..posts.models import Post
 from ..users.models import User
 

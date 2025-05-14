@@ -1,11 +1,8 @@
-from typing import List, Optional
 from datetime import datetime, timezone
 from sqlalchemy import create_engine
 
 from sqlalchemy import (
-    Column, 
     DateTime, 
-    Integer, 
     func
 )
 
@@ -15,22 +12,26 @@ from sqlalchemy.orm import (
     declarative_base,
     Mapped,
     mapped_column,
-    relationship
 )
-
 
 engine = create_engine('sqlite:///blogify.db')
 
-db_session = scoped_session(sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=engine
-))
+db_session = scoped_session(
+    sessionmaker(
+        autocommit=False,
+        autoflush=False,
+        bind=engine
+    )
+)
 
 Base = declarative_base()
 Base.query = db_session.query_property()
 
+
 class BaseModel(Base):
+
+    # SoftDelete Model
+    
     __abstract__ = True
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -52,15 +53,3 @@ class BaseModel(Base):
     def with_deleted(cls, session):
         return session.query(cls)
 
-
-def init_db():
-    from apps.users.models import User, Followers
-    from apps.posts.models import Post, SchedulePost, MediaFiles
-    from apps.likes.models import Comments, Likes, PostViews
-
-    BaseModel.metadata.create_all(bind=engine)
-
-
-
-
-init_db()

@@ -18,7 +18,7 @@ from sqlalchemy.orm import (
     relationship
 )
 
-from database import BaseModel
+from database.basemodel import BaseModel
 from ..users.models import User
 
 

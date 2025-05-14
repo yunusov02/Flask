@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Length, EqualTo, Email
 class RegistrationForm(FlaskForm):
 
     username = StringField(
-        "Enter a Username", 
+        "Enter your username", 
         validators=[
             DataRequired(), 
             Length(5, 30)
@@ -42,7 +42,7 @@ class RegistrationForm(FlaskForm):
 class LoginForm(FlaskForm):
 
     username = StringField(
-        "Enter a Username", 
+        "Enter your username", 
         validators=[
             DataRequired(), 
             Length(5, 30)

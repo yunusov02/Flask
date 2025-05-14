@@ -4,8 +4,24 @@
 {% block content %}
 
     <div>
-        <h1>This is text</h1>
+        <h3>Registration</h3>
     </div>
+
+    <form method="post">
+
+        {% from 'bootstrap5/form.html' import render_form %}
+
+        {{ context.form.csrf_token }}
+
+        {{ render_form(context.form) }}
+
+
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+        <div class="container text-center">
+            <p>Already have an account</p>
+            <a href="{{ url_for('auth.login') }}">Login</a>
+        </div>
+    </form>
 
 
 {% endblock %}

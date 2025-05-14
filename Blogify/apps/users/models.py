@@ -8,7 +8,7 @@ from sqlalchemy.orm import (
     relationship,
 )
 
-from database import BaseModel
+from database.basemodel import BaseModel
 
 
 class User(BaseModel):
@@ -19,11 +19,13 @@ class User(BaseModel):
     username: Mapped[str] = mapped_column(String(30))
     email: Mapped[str] = mapped_column(String(50), unique=True)
     password: Mapped[str] = mapped_column(String)
+    role: Mapped[int] = mapped_column(default=0)
 
-    def __init__(self, username=None, email=None, password=None):
+    def __init__(self, username=None, email=None, password=None, role=None):
         self.username = username
         self.email = email
         self.password = password
+        self.role = role
 
     def __repr__(self):
         return f'User <{self.username}>'
