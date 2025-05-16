@@ -29,8 +29,16 @@ class Category(BaseModel):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(255), unique=True)
 
+    def __init__(self, name: str):
+        self.name = name
 
+    def __repr__(self):
+        return f"Category(id={self.id}, name={self.name})"
 
+    def __str__(self):
+        return f"Category: {self.name}"
+    
+    
 class Post(BaseModel):
 
     __tablename__ = "posts"

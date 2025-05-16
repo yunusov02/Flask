@@ -26,14 +26,23 @@
           <a class="navbar-brand" href="#">Blogify</a>
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{ url_for('base') }}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ url_for('auth.login') }}">Login<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ url_for('auth.register') }}">Register<span class="sr-only">(current)</span></a>
-            </li>
+            {% if session.user_id %}
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('auth.profile') }}">Profile<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout<span class="sr-only">(current)</span></a>
+              </li>
+            {% else %}
+              <li class="nav-item active">
+                  <a class="nav-link" href="{{ url_for('auth.login') }}">Login<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" href="{{ url_for('auth.register') }}">Register<span class="sr-only">(current)</span></a>
+              </li>
+            {% endif %}
           </ul>
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -45,13 +54,16 @@
     </nav>
 
     <div class="container mt-3">
-      {% with messages = get_flashed_messages() %}
+      {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-          <ul class=flashes>
-          {% for message in messages %}
-            <li>{{ message }}</li>
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
           {% endfor %}
-          </ul>
         {% endif %}
       {% endwith %}
     </div>

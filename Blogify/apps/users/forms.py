@@ -9,7 +9,7 @@ class RegistrationForm(FlaskForm):
         "Enter your username", 
         validators=[
             DataRequired(), 
-            Length(5, 30)
+            Length(5, 30, message="Your username must be at least 5 character")
         ]
     )
 
@@ -17,7 +17,7 @@ class RegistrationForm(FlaskForm):
         "Enter your email", 
         validators=[
             DataRequired(), 
-            Email()
+            Email(message="You must enter a valid email")
         ]
     )
     
@@ -35,6 +35,12 @@ class RegistrationForm(FlaskForm):
             DataRequired(),
             EqualTo("password", message="Passwords must match")
         ]
+    )
+
+    submit = SubmitField("Register", 
+        render_kw={
+            "class": "btn btn-primary btn-block"
+        }
     )
 
 
@@ -57,3 +63,8 @@ class LoginForm(FlaskForm):
         ]
     )
 
+    submit = SubmitField("Lig in", 
+        render_kw={
+            "class": "btn btn-primary btn-block"
+        }
+    )

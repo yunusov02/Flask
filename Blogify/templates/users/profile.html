@@ -1,0 +1,44 @@
+{% extends  'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static', filename='user_profile/user_profile.jpg') }}" alt="">
+                <div class="card-body">
+                    <h3>Profile</h3>
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <a href="#" class="btn btn-primary">Update Profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link {% if active_tab == 'posts' %}active{% endif %}" href="{{ url_for('posts.user_posts', id=user.id) }}">Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if active_tab == 'followers' %}active{% endif %}" href="#">Followers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if active_tab == 'chats' %}active{% endif %}" href="#">Chats</a>
+                </li>
+            </ul>
+            
+            <div class="container">
+                {% block user_profile %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+      <h3>Create a Post</h3>
+    </div>
+
+    <form method="post">
+
+      {% from 'bootstrap5/form.html' import render_form %}
+      {{ render_form(form) }}
+
+    </form>
+
+    {{ ckeditor.load() }}
+    {{ ckeditor.config(name='body') }}
+{% endblock %}
